@@ -1,16 +1,50 @@
 {
-  "name": "react-native-scrollable-tab-view",
-  "version": "0.10.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint -c .eslintrc . --ignore-path .gitignore",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_from": "git+https://github.com/compojoom/react-native-scrollable-tab-view.git#fixes_android",
+  "_id": "react-native-scrollable-tab-view@0.8.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/react-native-scrollable-tab-view",
+  "_phantomChildren": {
+    "fbjs": "0.8.14",
+    "loose-envify": "1.3.1",
+    "object-assign": "4.1.1"
   },
-  "repository": {
+  "_requested": {
     "type": "git",
-    "url": "git+https://github.com/brentvatne/react-native-scrollable-tab-view.git"
+    "raw": "react-native-scrollable-tab-view@git+https://github.com/compojoom/react-native-scrollable-tab-view.git#fixes_android",
+    "name": "react-native-scrollable-tab-view",
+    "escapedName": "react-native-scrollable-tab-view",
+    "rawSpec": "git+https://github.com/compojoom/react-native-scrollable-tab-view.git#fixes_android",
+    "saveSpec": "git+https://github.com/compojoom/react-native-scrollable-tab-view.git#fixes_android",
+    "fetchSpec": "https://github.com/compojoom/react-native-scrollable-tab-view.git",
+    "gitCommittish": "fixes_android"
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/compojoom/react-native-scrollable-tab-view.git#389a4cc7b8349d9d12d511ade5fd233ade167327",
+  "_spec": "react-native-scrollable-tab-view@git+https://github.com/compojoom/react-native-scrollable-tab-view.git#fixes_android",
+  "_where": "/Users/edoardomoreni/Desktop/emma-app",
+  "author": {
+    "name": "Brent Vatne"
+  },
+  "bugs": {
+    "url": "https://github.com/brentvatne/react-native-scrollable-tab-view/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "create-react-class": "^15.6.2",
+    "prop-types": "^15.6.0",
+    "react-timer-mixin": "^0.13.3"
+  },
+  "deprecated": false,
+  "description": "[![npm version](https://badge.fury.io/js/react-native-scrollable-tab-view.svg)](https://badge.fury.io/js/react-native-scrollable-tab-view)",
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.1.1"
+  },
+  "homepage": "https://github.com/brentvatne/react-native-scrollable-tab-view#readme",
   "keywords": [
     "react-native-component",
     "react-component",
@@ -19,22 +53,19 @@
     "tab",
     "scrollable"
   ],
-  "author": "Brent Vatne",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/brentvatne/react-native-scrollable-tab-view/issues"
-  },
+  "main": "index.js",
+  "name": "react-native-scrollable-tab-view",
   "peerDependencies": {
     "react-native": ">=0.20.0"
   },
-  "homepage": "https://github.com/brentvatne/react-native-scrollable-tab-view#readme",
-  "dependencies": {
-    "react-timer-mixin": "^0.13.3",
-    "prop-types": "^15.6.0",
-    "create-react-class": "^15.6.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brentvatne/react-native-scrollable-tab-view.git"
   },
-  "devDependencies": {
-    "babel-eslint": "^6.1.2",
-    "eslint": "^3.1.1"
-  }
+  "scripts": {
+    "lint": "eslint -c .eslintrc . --ignore-path .gitignore",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.8.0"
 }

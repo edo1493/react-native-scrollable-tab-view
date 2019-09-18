@@ -21,8 +21,8 @@ const ScrollableTabBar = createReactClass({
     activeTab: PropTypes.number,
     tabs: PropTypes.array,
     backgroundColor: PropTypes.string,
-    activeTextColor: PropTypes.string,
-    inactiveTextColor: PropTypes.string,
+    activeTextStyle: PropTypes.object,
+    inactiveTextStyle: PropTypes.object,
     scrollOffset: PropTypes.number,
     style: ViewPropTypes.style,
     tabStyle: ViewPropTypes.style,
@@ -36,8 +36,8 @@ const ScrollableTabBar = createReactClass({
   getDefaultProps() {
     return {
       scrollOffset: 52,
-      activeTextColor: 'navy',
-      inactiveTextColor: 'black',
+      activeTextStyle: {},
+      inactiveTextStyle: {},
       backgroundColor: null,
       style: {},
       tabStyle: {},
@@ -98,6 +98,10 @@ const ScrollableTabBar = createReactClass({
     if (Platform.OS === 'android') {
       this._scrollView.scrollTo({x: newScrollX, y: 0, animated: false, });
     } else {
+      if(this.props.tabs.length - 1 == position) {
+        this._scrollView.scrollToEnd();
+        return;
+      }
       const rightBoundScroll = this._tabContainerMeasurements.width - (this._containerMeasurements.width);
       newScrollX = newScrollX > rightBoundScroll ? rightBoundScroll : newScrollX;
       this._scrollView.scrollTo({x: newScrollX, y: 0, animated: false, });
@@ -125,10 +129,10 @@ const ScrollableTabBar = createReactClass({
   },
 
   renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
-    const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
-    const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = isTabActive ? 'bold' : 'normal';
-
+    const { activeTextStyle, inactiveTextStyle } = this.props;
+    const textStyle = isTabActive ? activeTextStyle : inactiveTextStyle;
+    const backgroundLineColor = 'rgba(48,53,57,0.07)';
+    const marginBottomLine = 0;
     return <Button
       key={`${name}_${page}`}
       accessible={true}
@@ -137,10 +141,13 @@ const ScrollableTabBar = createReactClass({
       onPress={() => onPressHandler(page)}
       onLayout={onLayoutHandler}
     >
+    <View>
       <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+        <Text allowFontScaling={false} style={[textStyle]}>
           {name}
         </Text>
+      </View>
+      <View style={{height:2, backgroundColor:backgroundLineColor, marginBottom:marginBottomLine, borderRadius:22}} />
       </View>
     </Button>;
   },
@@ -148,7 +155,7 @@ const ScrollableTabBar = createReactClass({
   measureTab(page, event) {
     const { x, width, height, } = event.nativeEvent.layout;
     this._tabsMeasurements[page] = {left: x, right: x + width, width, height, };
-    this.updateView({value: this.props.scrollValue.__getValue(), });
+    this.updateView({value: this.props.scrollValue._value, });
   },
 
   render() {
@@ -171,6 +178,7 @@ const ScrollableTabBar = createReactClass({
       <ScrollView
         ref={(scrollView) => { this._scrollView = scrollView; }}
         horizontal={true}
+        contentContainerStyle={this.props.scrollViewContainer}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         directionalLockEnabled={true}
@@ -207,12 +215,12 @@ const ScrollableTabBar = createReactClass({
       width = WINDOW_WIDTH;
     }
     this.setState({ _containerWidth: width, });
-    this.updateView({value: this.props.scrollValue.__getValue(), });
+    this.updateView({value: this.props.scrollValue._value, });
   },
 
   onContainerLayout(e) {
     this._containerMeasurements = e.nativeEvent.layout;
-    this.updateView({value: this.props.scrollValue.__getValue(), });
+    this.updateView({value: this.props.scrollValue._value, });
   },
 });
 
@@ -220,15 +228,15 @@ module.exports = ScrollableTabBar;
 
 const styles = StyleSheet.create({
   tab: {
-    height: 49,
+    height: 37,
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 20,
     paddingRight: 20,
   },
   container: {
-    height: 50,
-    borderWidth: 1,
+    height: 40,
+    borderWidth: 2,
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
@@ -236,6 +244,5 @@ const styles = StyleSheet.create({
   },
   tabs: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
   },
 });
